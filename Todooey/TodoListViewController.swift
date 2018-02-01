@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  Todooey
+//  Todooey/Users/hogue/Documents/Todooey/Todooey/TodoListViewController.swift
 //
 //  Created by Andrew Hogue on 2018-02-01.
 //  Copyright © 2018 Andrew Hogue. All rights reserved.
@@ -10,7 +10,7 @@ import UIKit
 
 class TodoListViewController: UITableViewController {
 
-    let itemArray = ["Fix things", "Find Things", "Break Things"]
+    var itemArray = ["Fix things", "Find Things", "Break Things"]
     
     
     
@@ -44,6 +44,25 @@ class TodoListViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    //MARK - Add items button
     
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Add New Todooey Item", message: "", preferredStyle: .alert)
+        var textfield : UITextField = UITextField()
+        
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            // what will happen when user clicks add item button on ui alert
+            self.itemArray.append(textfield.text!)
+            self.tableView.reloadData()
+            
+        }
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Create New Item"
+            textfield = alertTextField
+        }
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
 }
 
