@@ -19,7 +19,6 @@ class CategoryViewController: UITableViewController {
         loadCategories()
     }
 
-    
     func save(category: Category) {
         do{
             try realm.write {
@@ -33,17 +32,9 @@ class CategoryViewController: UITableViewController {
     
     func loadCategories(){
         categoryArray = realm.objects(Category.self)
-        
-        
         tableView.reloadData()
     }
 
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
@@ -51,12 +42,9 @@ class CategoryViewController: UITableViewController {
         var textfield : UITextField = UITextField()
         let action = UIAlertAction(title: "Add Category", style: .default) {
             (action) in
-            
-            
-            let newCategory = Category()
-            newCategory.name = textfield.text!
-            
-            self.save(category: newCategory)
+                let newCategory = Category()
+                newCategory.name = textfield.text!
+                self.save(category: newCategory)
         }
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create new Category"
@@ -80,7 +68,6 @@ class CategoryViewController: UITableViewController {
     }
     
     
-    
     //MARK: - Tableview delegate methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected row: \(indexPath.row)")
@@ -92,7 +79,6 @@ class CategoryViewController: UITableViewController {
 
         if let indexPath = tableView.indexPathForSelectedRow {
             destinationVC.selectedCategory = self.categoryArray?[indexPath.row]
-            print("prepare for segue: \(destinationVC.selectedCategory?.name)")
         }
 
 

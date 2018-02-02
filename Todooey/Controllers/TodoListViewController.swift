@@ -15,13 +15,11 @@ class TodoListViewController: UITableViewController {
     var selectedCategory : Category? {
         didSet{
             loadItems()
-            print("didSet category: \(selectedCategory?.name)")
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         loadItems()
     }
 
@@ -62,9 +60,6 @@ class TodoListViewController: UITableViewController {
 
     //MARK - Tableview Delegate methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let accType = tableView.cellForRow(at: indexPath)?.accessoryType
-
         if let item = todoItems?[indexPath.row] {
             do{
                 try realm.write {
@@ -88,7 +83,7 @@ class TodoListViewController: UITableViewController {
           
             let newItem = Item()
             newItem.title = textfield.text!
-            //newItem.dateCreated = Date()
+            newItem.dateCreated = Date()
             
             self.save(item: newItem)
         }
